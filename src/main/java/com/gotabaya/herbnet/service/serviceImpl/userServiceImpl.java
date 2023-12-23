@@ -1,6 +1,8 @@
 package com.gotabaya.herbnet.service.serviceImpl;
 
+import com.gotabaya.herbnet.mapper.UserMapper;
 import com.gotabaya.herbnet.model.User;
+import com.gotabaya.herbnet.model.dto.UserDto;
 import com.gotabaya.herbnet.repository.UserRepository;
 import com.gotabaya.herbnet.service.UserService;
 import jakarta.persistence.EntityNotFoundException;
@@ -12,15 +14,17 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class userServiceImpl implements UserService {
-    public final UserRepository userRepository;
+    final UserRepository userRepository;
+    final UserMapper userMapper;
 
     @Override
-    public List<User> findAll() {
-        return userRepository.findAll();
+    public List<UserDto> findAll() {
+        return userRepository.findAll().stream().map(userMapper::toDto).toList();
     }
 
     @Override
-    public User findById(Long userId) {
-        return userRepository.findById(userId).orElseThrow(() -> new EntityNotFoundException("User does not exist by Id "+userId));
+    public UserDto findById(Long userId) {
+        User user = userRepository.findById(userId).orElseThrow(() -> new EntityNotFoundException("User does not exist by Id " + userId));
+        return userMapper.toDto(user);
     }
 }

@@ -1,10 +1,10 @@
 package com.gotabaya.herbnet.service;
 
-import com.gotabaya.herbnet.model.UserProfile;
+import com.gotabaya.herbnet.model.dto.UserProfileDto;
 
 import java.util.List;
 
 public interface UserProfileService {
-	List<UserProfile> findAll();
-	UserProfile findById(Long profileId);
+	List<UserProfileDto> findAll();
+	UserProfileDto findById(Long profileId);
 }

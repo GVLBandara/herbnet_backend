@@ -1,6 +1,6 @@
 package com.gotabaya.herbnet.controller;
 
-import com.gotabaya.herbnet.model.User;
+import com.gotabaya.herbnet.model.dto.UserDto;
 import com.gotabaya.herbnet.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,12 +17,12 @@ public class UserController {
     public final UserService userService;
 
     @GetMapping("")
-    public List<User> getAll(){
+    public List<UserDto> getAll(){
         return userService.findAll();
     }
 
     @GetMapping("/{userId}")
-    public User findById(@PathVariable Long userId){
+    public UserDto findById(@PathVariable Long userId){
         return userService.findById(userId);
     }
 }
