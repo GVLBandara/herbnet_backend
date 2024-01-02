@@ -20,13 +20,15 @@ public class MessageServiceImpl implements MessageService {
 	final MessageMapper messageMapper;
 
 	@Override
-	public List<MessageListPreviewDto> listChats() {
-		return messageRepository.findLastMessagesForEachUser().stream().map(messageMapper::toListPreview).toList();
+	public List<MessageListPreviewDto> listChats(String username) {
+		User user = userRepository.findByUsername(username).orElseThrow(() -> new EntityNotFoundException("User not found by username" + username));
+		return messageRepository.findLastMessagesForEachUser(user.getUserId()).stream().map(message -> messageMapper.toListPreview(message, user)).toList();
 	}
 
 	@Override
-	public List<MessageDto> fromSender(Long senderId) {
+	public List<MessageDto> fromSender(Long senderId, String username) {
 		User sender = userRepository.findById(senderId).orElseThrow(() -> new EntityNotFoundException("User not found by Id" + senderId));
-		return messageRepository.findAllBySender(sender).stream().map(messageMapper::toDto).toList();
+		User receiver = userRepository.findByUsername(username).orElseThrow(() -> new EntityNotFoundException("User not found by username" + username));
+		return messageRepository.findAllBySender(sender, receiver).stream().map(messageMapper::toDto).toList();
 	}
 }

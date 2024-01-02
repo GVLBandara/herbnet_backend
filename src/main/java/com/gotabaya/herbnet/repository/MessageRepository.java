@@ -10,12 +10,27 @@ import java.util.List;
 //TODO Modify to be used with Principles
 public interface MessageRepository extends ListCrudRepository<Message, Long> {
 	@Query(value = """
-		SELECT m FROM Message m
-		WHERE m.timestamp = (SELECT MAX(m2.timestamp) FROM Message m2 WHERE m2.sender = m.sender)
-		ORDER BY m.isRead ASC , m.timestamp DESC
-	""")
-	List<Message> findLastMessagesForEachUser();
+		WITH LatestMessages AS (
+			SELECT
+				IF(senderid = :userid, receiverid, senderid) AS correspondent_id,
+				MAX(Timestamp) AS latest_messagetime
+			FROM message
+			WHERE senderid = :userid OR receiverid = :userid
+			GROUP BY
+				IF(senderid = :userid, receiverid, senderid)
+		)
+  
+		SELECT * FROM LatestMessages lm
+		JOIN message m ON
+			(lm.correspondent_id = m.senderid OR lm.correspondent_id = m.receiverid)
+			AND  lm.latest_messagetime = m.Timestamp
+	""", nativeQuery = true)
+	List<Message> findLastMessagesForEachUser(@Param("userid") Long userid);
 
-	@Query("SELECT m FROM Message m WHERE m.sender = :sender OR m.receiver = :sender")
-	List<Message> findAllBySender(@Param("sender") User sender);
+	@Query("""
+		SELECT m FROM Message m
+		WHERE (m.sender = :sender AND m.receiver = :receiver)
+		OR (m.sender = :receiver AND m.receiver = :sender)
+	""")
+	List<Message> findAllBySender(@Param("sender") User sender, @Param("receiver") User receiver);
 }

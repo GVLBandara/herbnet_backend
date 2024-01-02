@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.security.Principal;
 import java.util.List;
 
 @RestController
@@ -18,12 +19,12 @@ public class MessageController {
 	final MessageService messageService;
 
 	@GetMapping("")
-	List<MessageListPreviewDto> listChats(){
-		return messageService.listChats();
+	List<MessageListPreviewDto> listChats(Principal principal){
+		return messageService.listChats(principal.getName());
 	}
 
 	@GetMapping("/{senderId}")
-	List<MessageDto> withSender(@PathVariable(name = "senderId") Long senderId){
-		return messageService.fromSender(senderId);
+	List<MessageDto> withSender(@PathVariable(name = "senderId") Long senderId, Principal principal){
+		return messageService.fromSender(senderId, principal.getName());
 	}
 }

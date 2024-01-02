@@ -6,6 +6,6 @@ import com.gotabaya.herbnet.model.dto.MessageListPreviewDto;
 import java.util.List;
 
 public interface MessageService {
-	List<MessageListPreviewDto> listChats();
-	List<MessageDto> fromSender(Long senderId);
+	List<MessageListPreviewDto> listChats(String username);
+	List<MessageDto> fromSender(Long senderId, String username);
 }

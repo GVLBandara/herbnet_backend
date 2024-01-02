@@ -5,7 +5,7 @@ import com.gotabaya.herbnet.model.User;
 import com.gotabaya.herbnet.model.dto.SignUpRequest;
 import com.gotabaya.herbnet.model.dto.UserDto;
 import com.gotabaya.herbnet.repository.UserRepository;
-import jakarta.persistence.EntityNotFoundException;
+import com.gotabaya.herbnet.security.exception.UserNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -29,7 +29,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDto findById(Long userId) {
-        User user = userRepository.findById(userId).orElseThrow(() -> new EntityNotFoundException("User does not exist by Id " + userId));
+        User user = userRepository.findById(userId).orElseThrow(() -> new UserNotFoundException("User does not exist by Id " + userId));
         return userMapper.toDto(user);
     }
 

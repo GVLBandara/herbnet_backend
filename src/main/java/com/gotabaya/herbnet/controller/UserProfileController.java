@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
+import java.security.Principal;
 
 @RequiredArgsConstructor
 @RestController
@@ -17,8 +17,8 @@ public class UserProfileController {
 	final UserProfileService userProfileService;
 
 	@GetMapping("")
-	public List<UserProfileDto> findAll(){
-		return userProfileService.findAll();
+	public UserProfileDto currentUP(Principal principal){
+		return userProfileService.currentUP(principal.getName());
 	}
 
 	@GetMapping("/{profileId}")
