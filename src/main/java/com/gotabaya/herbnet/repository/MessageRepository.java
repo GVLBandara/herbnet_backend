@@ -10,20 +10,16 @@ import java.util.List;
 //TODO Modify to be used with Principles
 public interface MessageRepository extends ListCrudRepository<Message, Long> {
 	@Query(value = """
-		WITH LatestMessages AS (
+		SELECT * FROM (
 			SELECT
 				IF(senderid = :userid, receiverid, senderid) AS correspondent_id,
 				MAX(Timestamp) AS latest_messagetime
 			FROM message
-			WHERE senderid = :userid OR receiverid = :userid
-			GROUP BY
-				IF(senderid = :userid, receiverid, senderid)
-		)
-  
-		SELECT * FROM LatestMessages lm
-		JOIN message m ON
-			(lm.correspondent_id = m.senderid OR lm.correspondent_id = m.receiverid)
-			AND  lm.latest_messagetime = m.Timestamp
+			WHERE :userid IN (senderid, receiverid)
+			GROUP BY correspondent_id
+		) lm JOIN message m
+		ON lm.correspondent_id IN (m.senderid, m.receiverid) AND lm.latest_messagetime = m.Timestamp
+		ORDER BY IsRead, Timestamp DESC ;
 	""", nativeQuery = true)
 	List<Message> findLastMessagesForEachUser(@Param("userid") Long userid);
 

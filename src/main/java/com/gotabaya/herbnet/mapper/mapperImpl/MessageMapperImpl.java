@@ -41,8 +41,8 @@ public class MessageMapperImpl implements MessageMapper {
 		return new MessageListPreviewDto(
 				SenderName,
 				message.getMessageContent(),
-				message.isRead(),
-				message.getTimestamp()
+				message.getTimestamp(),
+				message.isRead()
 		);
 	}
 }
