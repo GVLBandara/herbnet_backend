@@ -2,15 +2,19 @@ package com.gotabaya.herbnet.mapper.mapperImpl;
 
 import com.gotabaya.herbnet.mapper.MessageMapper;
 import com.gotabaya.herbnet.model.Message;
+import com.gotabaya.herbnet.model.Product;
 import com.gotabaya.herbnet.model.User;
-import com.gotabaya.herbnet.model.dto.MessageListPreviewDto;
-import com.gotabaya.herbnet.model.dto.UserProfileDto;
 import com.gotabaya.herbnet.model.dto.MessageDto;
+import com.gotabaya.herbnet.model.dto.MessageListPreviewDto;
+import com.gotabaya.herbnet.model.dto.NewMessageDto;
+import com.gotabaya.herbnet.model.dto.UserProfileDto;
 import com.gotabaya.herbnet.repository.ProductRepository;
 import com.gotabaya.herbnet.repository.UserRepository;
 import com.gotabaya.herbnet.service.UserProfileService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDateTime;
 
 @Service
 @RequiredArgsConstructor
@@ -21,9 +25,9 @@ public class MessageMapperImpl implements MessageMapper {
 	@Override
 	public MessageDto toDto(Message message) {
 		return new MessageDto(
-				message.getMessageId(),
-				message.getSender().getUsername(),
+				message.getSender().getUserId(),
 				message.getMessageContent(),
+				message.isRead(),
 				message.getTimestamp()
 		);
 	}
@@ -31,18 +35,37 @@ public class MessageMapperImpl implements MessageMapper {
 	@Override
 	public MessageListPreviewDto toListPreview(Message message, User user) {
 		UserProfileDto senderProfile;
+		Long withUserId;
 		if(message.getSender().equals(user)){
-			senderProfile = userProfileService.findById(message.getReceiver().getUserId());
+			withUserId = message.getReceiver().getUserId();
+			senderProfile = userProfileService.findById(withUserId);
 		}else {
-			senderProfile = userProfileService.findById(message.getSender().getUserId());
+			withUserId = message.getReceiver().getUserId();
+			senderProfile = userProfileService.findById(withUserId);
 		}
-		String SenderName = senderProfile.firstName() + " " + senderProfile.lastName();
-
+		String withUserName = senderProfile.firstName() + " " + senderProfile.lastName();
 		return new MessageListPreviewDto(
-				SenderName,
+				withUserId,
+				withUserName,
 				message.getMessageContent(),
 				message.getTimestamp(),
 				message.isRead()
+		);
+	}
+
+	@Override
+	public Message toEntity(NewMessageDto newMessage) {
+//		User receiver = userRepository.findById(newMessage.receiverId()).get();
+//		User sender = userRepository.findById(newMessage.senderId()).get();
+		Product product = productRepository.findById(newMessage.productId()).orElse(null);
+		return new Message(
+				null,
+				null,
+				null,
+				product,
+				newMessage.messageContent(),
+				LocalDateTime.now(),
+				false
 		);
 	}
 }

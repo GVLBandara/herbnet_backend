@@ -19,7 +19,7 @@ public interface MessageRepository extends ListCrudRepository<Message, Long> {
 			GROUP BY correspondent_id
 		) lm JOIN message m
 		ON lm.correspondent_id IN (m.senderid, m.receiverid) AND lm.latest_messagetime = m.Timestamp
-		ORDER BY IsRead, Timestamp DESC ;
+		ORDER BY IsRead DESC , Timestamp DESC;
 	""", nativeQuery = true)
 	List<Message> findLastMessagesForEachUser(@Param("userid") Long userid);
 
@@ -27,6 +27,7 @@ public interface MessageRepository extends ListCrudRepository<Message, Long> {
 		SELECT m FROM Message m
 		WHERE (m.sender = :sender AND m.receiver = :receiver)
 		OR (m.sender = :receiver AND m.receiver = :sender)
+		ORDER BY m.timestamp DESC
 	""")
 	List<Message> findAllBySender(@Param("sender") User sender, @Param("receiver") User receiver);
 }
