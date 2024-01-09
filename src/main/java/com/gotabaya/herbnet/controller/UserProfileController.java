@@ -4,7 +4,9 @@ import com.gotabaya.herbnet.model.dto.UserProfileDto;
 import com.gotabaya.herbnet.service.UserProfileService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.HttpServerErrorException;
 
 import java.security.Principal;
 
@@ -26,7 +28,12 @@ public class UserProfileController {
 
 	@ResponseStatus(HttpStatus.ACCEPTED)
 	@PutMapping("")
-	public void updateUP(@RequestBody UserProfileDto userProfileDto, Principal principal){
-		userProfileService.updateUP(userProfileDto, principal.getName());
+	public ResponseEntity updateUP(@RequestBody UserProfileDto userProfileDto, Principal principal){
+		try {
+			userProfileService.updateUP(userProfileDto, principal.getName());
+		}catch (HttpServerErrorException e){
+			return ResponseEntity.status(e.getStatusCode()).build();
+		}
+		return ResponseEntity.ok().build();
 	}
 }
