@@ -17,4 +17,16 @@ public class UserProfileMapperImpl implements UserProfileMapper {
 				userProfile.getProfilePictureURL()
 		);
 	}
+
+	@Override
+	public UserProfile toEntity(UserProfileDto userProfileDto) {
+		return new UserProfile(
+				null,
+				null,
+				userProfileDto.firstName(),
+				userProfileDto.lastName(),
+				userProfileDto.location(),
+				userProfileDto.profilePictureURL()
+		);
+	}
 }

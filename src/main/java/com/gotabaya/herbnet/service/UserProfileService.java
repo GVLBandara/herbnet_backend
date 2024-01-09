@@ -7,6 +7,6 @@ import java.util.List;
 public interface UserProfileService {
 	List<UserProfileDto> findAll();
 	UserProfileDto findById(Long profileId);
-
 	UserProfileDto currentUP(String username);
+	void updateUP(UserProfileDto userProfileDto, String username);
 }

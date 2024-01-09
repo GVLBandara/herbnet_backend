@@ -10,7 +10,9 @@ import com.gotabaya.herbnet.security.exception.UserNotFoundException;
 import com.gotabaya.herbnet.service.UserProfileService;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpServerErrorException;
 
 import java.util.List;
 
@@ -36,5 +38,18 @@ public class UserProfileServiceImpl implements UserProfileService {
 		User user = userRepository.findByUsername(username).orElseThrow(() -> new UserNotFoundException("User doesn't exist by username " + username));
 		UserProfile userProfile = userProfileRepository.findUserProfileByUser(user).orElseThrow(() -> new EntityNotFoundException("User profile doesn't exist by username " + username));
 		return userProfileMapper.toDto(userProfile);
+	}
+
+	@Override
+	public void updateUP(UserProfileDto userProfileDto, String username) {
+		if(!userProfileDto.username().equals(username)) throw new HttpServerErrorException(HttpStatus.UNAUTHORIZED);
+		else {
+			User current_user = userRepository.findByUsername(username).orElseThrow(() -> new UserNotFoundException("User doesn't exist by username " + username));
+			UserProfile userProfile = userProfileRepository.findUserProfileByUser(current_user).orElseThrow(() -> new EntityNotFoundException("User profile doesn't exist by username " + username));
+			UserProfile updatedUP = userProfileMapper.toEntity(userProfileDto);
+			updatedUP.setProfileId(userProfile.getProfileId());
+			updatedUP.setUser(current_user);
+			userProfileRepository.save(updatedUP);
+		}
 	}
 }

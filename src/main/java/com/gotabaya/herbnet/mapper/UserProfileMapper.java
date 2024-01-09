@@ -5,4 +5,5 @@ import com.gotabaya.herbnet.model.dto.UserProfileDto;
 
 public interface UserProfileMapper {
 	UserProfileDto toDto(UserProfile userProfile);
+	UserProfile toEntity(UserProfileDto userProfileDto);
 }

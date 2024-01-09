@@ -3,10 +3,8 @@ package com.gotabaya.herbnet.controller;
 import com.gotabaya.herbnet.model.dto.UserProfileDto;
 import com.gotabaya.herbnet.service.UserProfileService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 
@@ -24,5 +22,11 @@ public class UserProfileController {
 	@GetMapping("/{profileId}")
 	public UserProfileDto findById(@PathVariable("profileId") Long profileId){
 		return userProfileService.findById(profileId);
+	}
+
+	@ResponseStatus(HttpStatus.ACCEPTED)
+	@PutMapping("")
+	public void updateUP(@RequestBody UserProfileDto userProfileDto, Principal principal){
+		userProfileService.updateUP(userProfileDto, principal.getName());
 	}
 }
