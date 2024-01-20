@@ -1,16 +1,14 @@
 package com.gotabaya.herbnet.model;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
 @Entity
-@Getter
-@Setter
-@RequiredArgsConstructor
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Product {
 
 	@Id
@@ -25,6 +23,9 @@ public class Product {
 	@ManyToOne
 	@JoinColumn(name = "speciesid", referencedColumnName = "speciesid")
 	private Species species;
+
+	@Column(name = "plantname")
+	private String plantName;
 
 	@Column(name = "plantorgan")
 	private String plantOrgan;
