@@ -44,6 +44,13 @@ public class ProductServiceImpl implements ProductService {
 		else throw new HttpServerErrorException(HttpStatus.UNAUTHORIZED);
 	}
 
+	@Override
+	public void deleteProduct(Long productId, String username) {
+		Product product = productRepository.findById(productId).orElseThrow(() -> new HttpServerErrorException(HttpStatus.NOT_FOUND));
+		if(product.getUser().getUsername().equals(username)) productRepository.delete(product);
+		else throw new HttpServerErrorException(HttpStatus.UNAUTHORIZED);
+	}
+
 	private void saveProduct(ProductDto_long product, String username){
 		Product productEntity = productMapper.toEntity(product, username);
 		productRepository.save(productEntity);

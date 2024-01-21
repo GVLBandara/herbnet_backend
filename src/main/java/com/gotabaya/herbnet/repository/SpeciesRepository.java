@@ -6,5 +6,5 @@ import org.springframework.data.repository.ListCrudRepository;
 import java.util.Optional;
 
 public interface SpeciesRepository extends ListCrudRepository<Species, Long> {
-	Optional<Species> findSpeciesByCommonName(String name);
+	Optional<Species> findSpeciesByPlantName(String name);
 }

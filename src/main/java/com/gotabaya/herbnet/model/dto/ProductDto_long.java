@@ -8,6 +8,7 @@ public record ProductDto_long(
 		String species,
 		String plantOrgan,
 		String processingMethod,
+		String location,
 		String description,
 		String listingDate
 ) {}

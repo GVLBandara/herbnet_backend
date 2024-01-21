@@ -24,14 +24,13 @@ public class Product {
 	@JoinColumn(name = "speciesid", referencedColumnName = "speciesid")
 	private Species species;
 
-	@Column(name = "plantname")
-	private String plantName;
-
 	@Column(name = "plantorgan")
 	private String plantOrgan;
 
 	@Column(name = "processingmethod")
 	private String processingMethod;
+
+	private String location;
 
 	private String description;
 

@@ -17,7 +17,7 @@ public class Species {
 	private Long speciesId;
 	@Column(name = "scientificname")
 	private String scientificName;
-	@Column(name = "commonname")
-	private String commonName;
+	@Column(name = "plantname")
+	private String plantName;
 	private String description;
 }

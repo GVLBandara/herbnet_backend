@@ -50,4 +50,14 @@ public class ProductController {
 			return ResponseEntity.status(e.getStatusCode()).build();
 		}
 	}
+
+	@DeleteMapping("/{productId}")
+	ResponseEntity<String> deleteProduct(@PathVariable("productId") Long productId, Principal principal){
+		try{
+			productService.deleteProduct(productId, principal.getName());
+			return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+		}catch (HttpServerErrorException e){
+			return ResponseEntity.status(e.getStatusCode()).build();
+		}
+	}
 }

@@ -30,10 +30,10 @@ public class ProductMapperImpl implements ProductMapper {
 	public ProductDto_short toDto_short(Product product) {
 		return new ProductDto_short(
 				product.getProductId(),
-				product.getSpecies().getCommonName(),
-				product.getSpecies().getScientificName(),
+				product.getSpecies().getPlantName(),
 				product.getPlantOrgan(),
 				product.getProcessingMethod(),
+				product.getLocation(),
 				product.getListingDate().format(date)
 		);
 	}
@@ -46,10 +46,11 @@ public class ProductMapperImpl implements ProductMapper {
 				product.getProductId(),
 				userId,
 				name,
-				product.getSpecies().getCommonName(),
+				product.getSpecies().getPlantName(),
 				product.getSpecies().getScientificName(),
 				product.getPlantOrgan(),
 				product.getProcessingMethod(),
+				product.getLocation(),
 				product.getDescription(),
 				product.getListingDate().format(date_time)
 		);
@@ -58,15 +59,15 @@ public class ProductMapperImpl implements ProductMapper {
 	@Override
 	public Product toEntity(ProductDto_long product, String username) {
 		User user = userRepository.findByUsername(username).orElseThrow(() -> new UserNotFoundException("User doesn't exist by username " + username));
-		Species species = speciesRepository.findSpeciesByCommonName(product.plantName()).orElseThrow(() -> new UserNotFoundException("Species doesn't exist by name " + product.plantName()));
+		Species species = speciesRepository.findSpeciesByPlantName(product.plantName()).orElseThrow(() -> new UserNotFoundException("Species doesn't exist by name " + product.plantName()));
 
 		return new Product(
 				product.productId(),
 				user,
 				species,
 				product.plantOrgan(),
-				product.plantName(),
 				product.processingMethod(),
+				product.location(),
 				product.description(),
 				LocalDateTime.now()
 		);

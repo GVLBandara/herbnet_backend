@@ -1,16 +1,15 @@
 package com.gotabaya.herbnet.security;
 
-import com.gotabaya.herbnet.security.exception.DuplicatedUserInfoException;
 import com.gotabaya.herbnet.model.dto.AuthResponse;
 import com.gotabaya.herbnet.model.dto.LoginRequest;
 import com.gotabaya.herbnet.model.dto.SignUpRequest;
 import com.gotabaya.herbnet.model.dto.UserDto;
+import com.gotabaya.herbnet.security.exception.DuplicatedUserInfoException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Optional;
 
 @RequiredArgsConstructor
@@ -19,17 +18,6 @@ import java.util.Optional;
 public class AuthController {
 
     private final UserService userService;
-
-    @GetMapping("")
-    public List<UserDto> getAll(){
-        return userService.findAll();
-    }
-
-    @GetMapping("/{userId}")
-    public UserDto findById(@PathVariable Long userId){
-        return userService.findById(userId);
-    }
-
     @PostMapping("/authenticate")
     public ResponseEntity<AuthResponse> login(@RequestBody LoginRequest loginRequest) {
         Optional<UserDto> userOptional = userService.validUsernameAndPassword(loginRequest.getUsername(), loginRequest.getPassword());

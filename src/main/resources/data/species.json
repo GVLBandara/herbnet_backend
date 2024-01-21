@@ -1,0 +1,12 @@
+[
+  {"speciesId": null, "scientificName": "Species1", "plantName": "Plant1", "description": "Description1"},
+  {"speciesId": null, "scientificName": "Species2", "plantName": "Plant2", "description": "Description2"},
+  {"speciesId": null, "scientificName": "Species3", "plantName": "Plant3", "description": "Description3"},
+  {"speciesId": null, "scientificName": "Species4", "plantName": "Plant4", "description": "Description4"},
+  {"speciesId": null, "scientificName": "Species5", "plantName": "Plant5", "description": "Description5"},
+  {"speciesId": null, "scientificName": "Species6", "plantName": "Plant6", "description": "Description6"},
+  {"speciesId": null, "scientificName": "Species7", "plantName": "Plant7", "description": "Description7"},
+  {"speciesId": null, "scientificName": "Species8", "plantName": "Plant8", "description": "Description8"},
+  {"speciesId": null, "scientificName": "Species9", "plantName": "Plant9", "description": "Description9"},
+  {"speciesId": null, "scientificName": "Species10", "plantName": "Plant10", "description": "Description10"}
+]

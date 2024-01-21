@@ -1,0 +1,12 @@
+[
+  {"productId": null, "user": {"userId": 1}, "species": {"speciesId": 1}, "plantName": "Plant1", "plantOrgan": "Leaves", "processingMethod": "Dried", "location": "City A", "description": "Description1", "listingDate": "2023-11-20T10:30:00"},
+  {"productId": null, "user": {"userId": 2}, "species": {"speciesId": 2}, "plantName": "Plant2", "plantOrgan": "Flowers", "processingMethod": "Fresh", "location": "City B", "description": "Description2", "listingDate": "2023-11-21T12:45:00"},
+  {"productId": null, "user": {"userId": 3}, "species": {"speciesId": 3}, "plantName": "Plant3", "plantOrgan": "Roots", "processingMethod": "Ground", "location": "City C", "description": "Description3", "listingDate": "2023-11-22T15:20:00"},
+  {"productId": null, "user": {"userId": 4}, "species": {"speciesId": 4}, "plantName": "Plant4", "plantOrgan": "Leaves", "processingMethod": "Powdered", "location": "City D", "description": "Description4", "listingDate": "2023-11-23T08:00:00"},
+  {"productId": null, "user": {"userId": 5}, "species": {"speciesId": 5}, "plantName": "Plant5", "plantOrgan": "Fruits", "processingMethod": "Juiced", "location": "City E", "description": "Description5", "listingDate": "2023-11-24T17:30:00"},
+  {"productId": null, "user": {"userId": 6}, "species": {"speciesId": 6}, "plantName": "Plant6", "plantOrgan": "Leaves", "processingMethod": "Dried", "location": "City F", "description": "Description6", "listingDate": "2023-11-25T09:15:00"},
+  {"productId": null, "user": {"userId": 7}, "species": {"speciesId": 7}, "plantName": "Plant7", "plantOrgan": "Roots", "processingMethod": "Fresh", "location": "City G", "description": "Description7", "listingDate": "2023-11-26T14:00:00"},
+  {"productId": null, "user": {"userId": 8}, "species": {"speciesId": 8}, "plantName": "Plant8", "plantOrgan": "Flowers", "processingMethod": "Ground", "location": "City H", "description": "Description8", "listingDate": "2023-11-27T11:45:00"},
+  {"productId": null, "user": {"userId": 9}, "species": {"speciesId": 9}, "plantName": "Plant9", "plantOrgan": "Fruits", "processingMethod": "Juiced", "location": "City I", "description": "Description9", "listingDate": "2023-11-28T16:10:00"},
+  {"productId": null, "user": {"userId": 10}, "species": {"speciesId": 10}, "plantName": "Plant10", "plantOrgan": "Leaves", "processingMethod": "Powdered", "location": "City J", "description": "Description10", "listingDate": "2023-11-29T13:30:00"}
+]
