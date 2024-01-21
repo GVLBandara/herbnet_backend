@@ -13,7 +13,7 @@ import java.util.List;
 public class SpeciesServiceImpl implements SpeciesService {
 	final SpeciesRepository speciesRepository;
 	@Override
-	public List<Species> findAll() {
-		return speciesRepository.findAll();
+	public List<String> getAllNames() {
+		return speciesRepository.findAll().stream().map(Species::getCommonName).toList();
 	}
 }

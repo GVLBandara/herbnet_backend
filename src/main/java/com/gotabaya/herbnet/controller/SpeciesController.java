@@ -16,7 +16,7 @@ public class SpeciesController {
 	final SpeciesService speciesService;
 
 	@GetMapping("")
-	public List<Species> findAll(){
-		return speciesService.findAll();
+	public List<String> findAllNames(){
+		return speciesService.getAllNames();
 	}
 }
