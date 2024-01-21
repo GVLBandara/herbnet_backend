@@ -2,6 +2,7 @@ package com.gotabaya.herbnet.service.serviceImpl;
 
 import com.gotabaya.herbnet.model.Species;
 import com.gotabaya.herbnet.repository.SpeciesRepository;
+import com.gotabaya.herbnet.security.exception.UserNotFoundException;
 import com.gotabaya.herbnet.service.SpeciesService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -15,5 +16,10 @@ public class SpeciesServiceImpl implements SpeciesService {
 	@Override
 	public List<String> getAllNames() {
 		return speciesRepository.findAll().stream().map(Species::getCommonName).toList();
+	}
+
+	@Override
+	public Species getSpecies(String commonName) {
+		return speciesRepository.findSpeciesByCommonName(commonName).orElseThrow(() -> new UserNotFoundException("Species doesn't exist by name " + commonName));
 	}
 }

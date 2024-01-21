@@ -22,8 +22,8 @@ public class ProductMapperImpl implements ProductMapper {
 	final UserProfileService userProfileService;
 	final UserRepository userRepository;
 	final SpeciesRepository speciesRepository;
-	DateTimeFormatter date = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-	DateTimeFormatter date_time = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+	final DateTimeFormatter date = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+	final DateTimeFormatter date_time = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
 
 
 	@Override

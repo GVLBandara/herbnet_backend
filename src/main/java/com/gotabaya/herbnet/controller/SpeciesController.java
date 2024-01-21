@@ -4,6 +4,7 @@ import com.gotabaya.herbnet.model.Species;
 import com.gotabaya.herbnet.service.SpeciesService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -18,5 +19,10 @@ public class SpeciesController {
 	@GetMapping("")
 	public List<String> findAllNames(){
 		return speciesService.getAllNames();
+	}
+
+	@GetMapping("/{commonName}")
+	public Species getSpecies(@PathVariable("commonName") String commonName){
+		return speciesService.getSpecies(commonName);
 	}
 }

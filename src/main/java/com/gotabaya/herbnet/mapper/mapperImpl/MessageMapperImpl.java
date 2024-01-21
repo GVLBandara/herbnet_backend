@@ -35,14 +35,8 @@ public class MessageMapperImpl implements MessageMapper {
 	@Override
 	public MessageListPreviewDto toListPreview(Message message, User user) {
 		UserProfileDto senderProfile;
-		Long withUserId;
-		if(message.getSender().equals(user)){
-			withUserId = message.getReceiver().getUserId();
-			senderProfile = userProfileService.findById(withUserId);
-		}else {
-			withUserId = message.getReceiver().getUserId();
-			senderProfile = userProfileService.findById(withUserId);
-		}
+		Long withUserId = (message.getSender().equals(user))? message.getReceiver().getUserId():message.getSender().getUserId();
+		senderProfile = userProfileService.findById(withUserId);
 		String withUserName = senderProfile.firstName() + " " + senderProfile.lastName();
 		return new MessageListPreviewDto(
 				withUserId,
@@ -55,8 +49,6 @@ public class MessageMapperImpl implements MessageMapper {
 
 	@Override
 	public Message toEntity(NewMessageDto newMessage) {
-//		User receiver = userRepository.findById(newMessage.receiverId()).get();
-//		User sender = userRepository.findById(newMessage.senderId()).get();
 		Product product = productRepository.findById(newMessage.productId()).orElse(null);
 		return new Message(
 				null,
