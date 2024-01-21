@@ -3,7 +3,6 @@ package com.gotabaya.herbnet.controller;
 import com.gotabaya.herbnet.model.dto.UserProfileDto;
 import com.gotabaya.herbnet.service.UserProfileService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.HttpServerErrorException;
@@ -26,7 +25,16 @@ public class UserProfileController {
 		return userProfileService.findById(profileId);
 	}
 
-	@ResponseStatus(HttpStatus.ACCEPTED)
+	@PostMapping("")
+	public ResponseEntity<String> newUP(@RequestBody UserProfileDto userProfileDto, Principal principal){
+		try {
+			userProfileService.newUP(userProfileDto, principal.getName());
+		}catch (HttpServerErrorException e){
+			return ResponseEntity.status(e.getStatusCode()).build();
+		}
+		return ResponseEntity.ok().build();
+	}
+
 	@PutMapping("")
 	public ResponseEntity<String> updateUP(@RequestBody UserProfileDto userProfileDto, Principal principal){
 		try {
@@ -35,5 +43,10 @@ public class UserProfileController {
 			return ResponseEntity.status(e.getStatusCode()).build();
 		}
 		return ResponseEntity.ok().build();
+	}
+
+	@GetMapping("/available")
+	public boolean profileAvailable(Principal principal){
+		return userProfileService.isAvailable(principal.getName());
 	}
 }

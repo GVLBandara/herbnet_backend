@@ -22,7 +22,7 @@ public class UserProfile {
     private String firstName;
     @Column(name = "lastname")
     private String lastName;
-    private String location;
+    private String phone;
     @Column(name = "profilepictureurl")
     private String profilePictureURL;
 }

@@ -10,10 +10,10 @@ public class UserProfileMapperImpl implements UserProfileMapper {
 	@Override
 	public UserProfileDto toDto(UserProfile userProfile) {
 		return new UserProfileDto(
-				userProfile.getUser().getUsername(),
 				userProfile.getFirstName(),
 				userProfile.getLastName(),
-				userProfile.getLocation(),
+				userProfile.getPhone(),
+				userProfile.getUser().getEmail(),
 				userProfile.getProfilePictureURL()
 		);
 	}
@@ -25,7 +25,7 @@ public class UserProfileMapperImpl implements UserProfileMapper {
 				null,
 				userProfileDto.firstName(),
 				userProfileDto.lastName(),
-				userProfileDto.location(),
+				userProfileDto.phone(),
 				userProfileDto.profilePictureURL()
 		);
 	}

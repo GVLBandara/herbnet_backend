@@ -41,15 +41,31 @@ public class UserProfileServiceImpl implements UserProfileService {
 	}
 
 	@Override
-	public void updateUP(UserProfileDto userProfileDto, String username) {
-		if(!userProfileDto.username().equals(username)) throw new HttpServerErrorException(HttpStatus.UNAUTHORIZED);
+	public void newUP(UserProfileDto userProfileDto, String username) {
+		User current_user = userRepository.findByUsername(username).orElseThrow(() -> new UserNotFoundException("User doesn't exist by username " + username));
+		if(userProfileRepository.findUserProfileByUser(current_user).isPresent()) throw new HttpServerErrorException(HttpStatus.UNAUTHORIZED);
 		else {
-			User current_user = userRepository.findByUsername(username).orElseThrow(() -> new UserNotFoundException("User doesn't exist by username " + username));
-			UserProfile userProfile = userProfileRepository.findUserProfileByUser(current_user).orElseThrow(() -> new EntityNotFoundException("User profile doesn't exist by username " + username));
-			UserProfile updatedUP = userProfileMapper.toEntity(userProfileDto);
-			updatedUP.setProfileId(userProfile.getProfileId());
-			updatedUP.setUser(current_user);
-			userProfileRepository.save(updatedUP);
+			UserProfile newUP = userProfileMapper.toEntity(userProfileDto);
+			newUP.setUser(current_user);
+			userProfileRepository.save(newUP);
 		}
+	}
+
+	@Override
+	public void updateUP(UserProfileDto userProfileDto, String username) {
+		User current_user = userRepository.findByUsername(username).orElseThrow(() -> new UserNotFoundException("User doesn't exist by username " + username));
+		UserProfile userProfile = userProfileRepository.findUserProfileByUser(current_user).orElseThrow(() -> new EntityNotFoundException("User profile doesn't exist by username " + username));
+		UserProfile updatedUP = userProfileMapper.toEntity(userProfileDto);
+
+		updatedUP.setProfileId(userProfile.getProfileId());
+		current_user.setEmail(userProfileDto.email());
+		updatedUP.setUser(current_user);
+		userProfileRepository.save(updatedUP);
+	}
+
+	@Override
+	public boolean isAvailable(String username) {
+		User user = userRepository.findByUsername(username).orElseThrow(() -> new UserNotFoundException("User doesn't exist by username " + username));
+		return userProfileRepository.findUserProfileByUser(user).isPresent();
 	}
 }
