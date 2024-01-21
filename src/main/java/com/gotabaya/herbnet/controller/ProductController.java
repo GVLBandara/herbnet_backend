@@ -4,7 +4,10 @@ import com.gotabaya.herbnet.model.dto.ProductDto_long;
 import com.gotabaya.herbnet.model.dto.ProductDto_short;
 import com.gotabaya.herbnet.service.ProductService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.HttpServerErrorException;
 
 import java.security.Principal;
 import java.util.List;
@@ -29,7 +32,22 @@ public class ProductController {
 	}
 
 	@PostMapping("")
-	void newProduct(@RequestBody ProductDto_long product, Principal principal){
-		productService.addProduct(product, principal.getName());
+	ResponseEntity<String> newProduct(@RequestBody ProductDto_long product, Principal principal){
+		try {
+			productService.addProduct(product, principal.getName());
+			return ResponseEntity.status(HttpStatus.CREATED).build();
+		}catch (HttpServerErrorException e){
+			return ResponseEntity.status(e.getStatusCode()).build();
+		}
+	}
+
+	@PutMapping("")
+	ResponseEntity<String> updateProduct(@RequestBody ProductDto_long product, Principal principal){
+		try {
+			productService.updateProduct(product, principal.getName());
+			return ResponseEntity.ok().build();
+		}catch (HttpServerErrorException e){
+			return ResponseEntity.status(e.getStatusCode()).build();
+		}
 	}
 }

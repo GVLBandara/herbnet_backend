@@ -9,4 +9,6 @@ public interface ProductService {
 	List<ProductDto_short> list_short(String organ, String method);
 	ProductDto_long getProduct_long(Long productId);
 	void addProduct(ProductDto_long product, String username);
+	void updateProduct(ProductDto_long product, String username);
+
 }

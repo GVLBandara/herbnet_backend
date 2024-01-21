@@ -8,7 +8,9 @@ import com.gotabaya.herbnet.repository.ProductRepository;
 import com.gotabaya.herbnet.service.ProductService;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpServerErrorException;
 
 import java.util.List;
 
@@ -29,6 +31,20 @@ public class ProductServiceImpl implements ProductService {
 
 	@Override
 	public void addProduct(ProductDto_long product, String username) {
+		if(product.productId() == null)
+			saveProduct(product, username);
+		else throw new HttpServerErrorException(HttpStatus.UNAUTHORIZED);
+	}
+
+	@Override
+	public void updateProduct(ProductDto_long product, String username) {
+		Product p = productRepository.findById(product.productId()).orElseThrow(() -> new EntityNotFoundException("Product not found by Id: "+product.productId()));
+		if(p.getUser().getUsername().equals(username))
+			saveProduct(product, username);
+		else throw new HttpServerErrorException(HttpStatus.UNAUTHORIZED);
+	}
+
+	private void saveProduct(ProductDto_long product, String username){
 		Product productEntity = productMapper.toEntity(product, username);
 		productRepository.save(productEntity);
 	}

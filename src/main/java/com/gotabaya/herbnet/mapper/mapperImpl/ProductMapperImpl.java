@@ -61,7 +61,7 @@ public class ProductMapperImpl implements ProductMapper {
 		Species species = speciesRepository.findSpeciesByCommonName(product.plantName()).orElseThrow(() -> new UserNotFoundException("Species doesn't exist by name " + product.plantName()));
 
 		return new Product(
-				null,
+				product.productId(),
 				user,
 				species,
 				product.plantOrgan(),

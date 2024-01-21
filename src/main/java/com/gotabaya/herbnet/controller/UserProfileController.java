@@ -28,7 +28,7 @@ public class UserProfileController {
 
 	@ResponseStatus(HttpStatus.ACCEPTED)
 	@PutMapping("")
-	public ResponseEntity updateUP(@RequestBody UserProfileDto userProfileDto, Principal principal){
+	public ResponseEntity<String> updateUP(@RequestBody UserProfileDto userProfileDto, Principal principal){
 		try {
 			userProfileService.updateUP(userProfileDto, principal.getName());
 		}catch (HttpServerErrorException e){
