@@ -31,7 +31,7 @@ public class DataLoader  implements CommandLineRunner {
 	public void run(String... args) throws IOException {
 		if(userRepository.count()==0){
 			try(InputStream inputStream = TypeReference.class.getResourceAsStream("/data/user.json")){
-				List<SignUpRequest> users = objectMapper.readValue(inputStream, new TypeReference<List<SignUpRequest>>() {});
+				List<SignUpRequest> users = objectMapper.readValue(inputStream, new TypeReference<>() {});
 				users.forEach(userService::saveUser);
 			}
 		}
