@@ -8,5 +8,5 @@
   {"productId": null, "user": {"userId": 7}, "species": {"speciesId": 7}, "plantName": "Plant7", "plantOrgan": "Roots", "processingMethod": "Fresh", "location": "City G", "description": "Description7", "listingDate": "2023-11-26T14:00:00"},
   {"productId": null, "user": {"userId": 8}, "species": {"speciesId": 8}, "plantName": "Plant8", "plantOrgan": "Flowers", "processingMethod": "Ground", "location": "City H", "description": "Description8", "listingDate": "2023-11-27T11:45:00"},
   {"productId": null, "user": {"userId": 9}, "species": {"speciesId": 9}, "plantName": "Plant9", "plantOrgan": "Fruits", "processingMethod": "Juiced", "location": "City I", "description": "Description9", "listingDate": "2023-11-28T16:10:00"},
-  {"productId": null, "user": {"userId": 10}, "species": {"speciesId": 10}, "plantName": "Plant10", "plantOrgan": "Leaves", "processingMethod": "Powdered", "location": "City J", "description": "Description10", "listingDate": "2023-11-29T13:30:00"}
+  {"productId": null, "user": {"userId": 10}, "species": {"speciesId": 9}, "plantName": "Plant10", "plantOrgan": "Leaves", "processingMethod": "Powdered", "location": "City J", "description": "Description10", "listingDate": "2023-11-29T13:30:00"}
 ]

@@ -61,7 +61,6 @@ public class DataLoader  implements CommandLineRunner {
 				messages.forEach(message -> {
 					if(message.getReceiver().getUserId()%2==0)message.setRead(true);
 				});
-				messages.stream().map(Message::isRead).forEach(System.out::println);
 				messageRepository.saveAll(messages);
 			}
 		}

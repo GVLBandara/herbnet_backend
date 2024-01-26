@@ -15,11 +15,16 @@ public class SpeciesServiceImpl implements SpeciesService {
 	final SpeciesRepository speciesRepository;
 	@Override
 	public List<String> getAllNames() {
-		return speciesRepository.findAll().stream().map(Species::getPlantName).toList();
+		return speciesRepository.findAll().stream().map(Species::getEnglishName).toList();
 	}
 
 	@Override
-	public Species getSpecies(String commonName) {
-		return speciesRepository.findSpeciesByPlantName(commonName).orElseThrow(() -> new UserNotFoundException("Species doesn't exist by name " + commonName));
+	public Species getSpecies(String englishName) {
+		return speciesRepository.findSpeciesByEnglishName(englishName).orElseThrow(() -> new UserNotFoundException("Species doesn't exist by name " + englishName));
+	}
+
+	@Override
+	public Species getSpecies(long id) {
+		return speciesRepository.findById(id).orElseThrow(() -> new UserNotFoundException("Species doesn't exist by id " + id));
 	}
 }

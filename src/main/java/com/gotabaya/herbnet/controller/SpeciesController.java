@@ -21,8 +21,13 @@ public class SpeciesController {
 		return speciesService.getAllNames();
 	}
 
-	@GetMapping("/{commonName}")
-	public Species getSpecies(@PathVariable("commonName") String commonName){
-		return speciesService.getSpecies(commonName);
+	@GetMapping("/id/{id}")
+	public Species getSpecies(@PathVariable("id") long id){
+		return speciesService.getSpecies(id);
+	}
+
+	@GetMapping("/name/{englishName}")
+	public Species getSpecies(@PathVariable("englishName") String englishName){
+		return speciesService.getSpecies(englishName);
 	}
 }

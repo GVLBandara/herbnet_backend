@@ -6,5 +6,6 @@ import java.util.List;
 
 public interface SpeciesService {
 	List<String> getAllNames();
-	Species getSpecies(String commonName);
+	Species getSpecies(String englishName);
+	Species getSpecies(long id);
 }
