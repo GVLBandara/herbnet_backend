@@ -30,9 +30,18 @@ public class Product {
 	@Column(name = "processingmethod")
 	private String processingMethod;
 
+	@Column(name = "price")
+	private Double price;
+
 	private String location;
 
 	private String description;
+
+	@Column(name = "information")
+	private String additionalInformation;
+
+	@Column(name = "harvestdate")
+	private LocalDateTime harvestDate;
 
 	@Column(name = "listingdate")
 	private LocalDateTime listingDate;

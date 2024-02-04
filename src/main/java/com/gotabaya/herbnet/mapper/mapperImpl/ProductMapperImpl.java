@@ -13,6 +13,7 @@ import com.gotabaya.herbnet.service.UserProfileService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -50,8 +51,11 @@ public class ProductMapperImpl implements ProductMapper {
 				product.getSpecies().getScientificName(),
 				product.getPlantOrgan(),
 				product.getProcessingMethod(),
+				String.format("%.2f", product.getPrice()),
 				product.getLocation(),
 				product.getDescription(),
+				product.getAdditionalInformation(),
+				product.getHarvestDate().format(date_time),
 				product.getListingDate().format(date_time)
 		);
 	}
@@ -67,8 +71,11 @@ public class ProductMapperImpl implements ProductMapper {
 				species,
 				product.plantOrgan(),
 				product.processingMethod(),
+				Double.parseDouble(product.price()),
 				product.location(),
 				product.description(),
+				product.additionalInformation(),
+				LocalDate.parse(product.harvestDate()).atStartOfDay(),
 				LocalDateTime.now()
 		);
 	}
