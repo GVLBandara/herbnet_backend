@@ -24,7 +24,6 @@ public class ProductMapperImpl implements ProductMapper {
 	final UserRepository userRepository;
 	final SpeciesRepository speciesRepository;
 	final DateTimeFormatter date = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-	final DateTimeFormatter date_time = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
 
 
 	@Override
@@ -32,10 +31,8 @@ public class ProductMapperImpl implements ProductMapper {
 		return new ProductDto_short(
 				product.getProductId(),
 				product.getSpecies().getEnglishName(),
-				product.getPlantOrgan(),
-				product.getProcessingMethod(),
-				product.getLocation(),
-				product.getListingDate().format(date)
+				product.getDescription(),
+				String.format("%.2f", product.getPrice())
 		);
 	}
 
@@ -51,12 +48,12 @@ public class ProductMapperImpl implements ProductMapper {
 				product.getSpecies().getScientificName(),
 				product.getPlantOrgan(),
 				product.getProcessingMethod(),
-				String.format("%.2f", product.getPrice()),
+				product.getPrice().toString(),
 				product.getLocation(),
 				product.getDescription(),
 				product.getAdditionalInformation(),
-				product.getHarvestDate().format(date_time),
-				product.getListingDate().format(date_time)
+				product.getHarvestDate().format(date),
+				product.getListingDate().format(date)
 		);
 	}
 

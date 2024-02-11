@@ -19,7 +19,7 @@ import java.util.List;
 public class ProductController {
 	final ProductService productService;
 
-	@GetMapping("")
+	@GetMapping("/search")
 	List<ProductDto_short> findAll(
 			@RequestParam(value = "organ", required = false) String organ,
 			@RequestParam(value = "method", required = false) String method
