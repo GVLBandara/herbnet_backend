@@ -1,11 +1,13 @@
 package com.gotabaya.herbnet.model.dto;
 
+import com.gotabaya.herbnet.model.Species;
+
 public record ProductDto_long(
 		Long productId,
 		Long userId,
 		String userName,
 		String plantName,
-		String species,
+		Species species,
 		String plantOrgan,
 		String processingMethod,
 		String price,

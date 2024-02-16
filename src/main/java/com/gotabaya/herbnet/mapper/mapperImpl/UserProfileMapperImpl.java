@@ -26,7 +26,7 @@ public class UserProfileMapperImpl implements UserProfileMapper {
 				userProfileDto.firstName(),
 				userProfileDto.lastName(),
 				userProfileDto.phone(),
-				userProfileDto.profilePictureURL()
+				null
 		);
 	}
 }
