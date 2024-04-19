@@ -19,6 +19,11 @@ import java.util.List;
 public class ProductController {
 	final ProductService productService;
 
+	@GetMapping("")
+	List<ProductDto_short> MyProducts(Principal principal){
+		return productService.fromUser(principal.getName());
+	}
+
 	@GetMapping("/search")
 	List<ProductDto_short> findAll(
 			@RequestParam(value = "organ", required = false) String organ,
@@ -32,7 +37,7 @@ public class ProductController {
 		return productService.getProduct_long(productId);
 	}
 
-	@PostMapping("")
+	@PostMapping("/new")
 	ResponseEntity<String> newProduct(@RequestBody ProductDto_long product, Principal principal){
 		try {
 			productService.addProduct(product, principal.getName());
@@ -42,7 +47,7 @@ public class ProductController {
 		}
 	}
 
-	@PutMapping("")
+	@PutMapping("/update")
 	ResponseEntity<String> updateProduct(@RequestBody ProductDto_long product, Principal principal){
 		try {
 			productService.updateProduct(product, principal.getName());
@@ -52,7 +57,7 @@ public class ProductController {
 		}
 	}
 
-	@DeleteMapping("/{productId}")
+	@DeleteMapping("/delete/{productId}")
 	ResponseEntity<String> deleteProduct(@PathVariable("productId") Long productId, Principal principal){
 		try{
 			productService.deleteProduct(productId, principal.getName());

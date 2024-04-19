@@ -2,9 +2,11 @@ package com.gotabaya.herbnet.service.serviceImpl;
 
 import com.gotabaya.herbnet.mapper.ProductMapper;
 import com.gotabaya.herbnet.model.Product;
+import com.gotabaya.herbnet.model.User;
 import com.gotabaya.herbnet.model.dto.ProductDto_long;
 import com.gotabaya.herbnet.model.dto.ProductDto_short;
 import com.gotabaya.herbnet.repository.ProductRepository;
+import com.gotabaya.herbnet.security.UserService;
 import com.gotabaya.herbnet.service.ProductService;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -12,13 +14,23 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpServerErrorException;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 public class ProductServiceImpl implements ProductService {
 	final ProductRepository productRepository;
+	final UserService userService;
 	final ProductMapper productMapper;
+
+	@Override
+	public List<ProductDto_short> fromUser(String username) {
+		Optional<User> user = userService.getUserByUsername(username);
+		return user.map(u -> productRepository.findByUser(u).stream().map(productMapper::toDto_short).toList()).orElse(Collections.emptyList());
+	}
+
 	@Override
 	public List<ProductDto_short> list_short(String organ, String method) {
 		return productRepository.findAll(organ, method).stream().map(productMapper::toDto_short).toList();

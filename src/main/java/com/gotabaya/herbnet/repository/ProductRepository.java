@@ -1,6 +1,7 @@
 package com.gotabaya.herbnet.repository;
 
 import com.gotabaya.herbnet.model.Product;
+import com.gotabaya.herbnet.model.User;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.ListCrudRepository;
 import org.springframework.data.repository.query.Param;
@@ -14,4 +15,6 @@ public interface ProductRepository extends ListCrudRepository<Product, Long> {
 		AND (:method IS NULL OR p.processingMethod ILIKE :method)
 	""")
 	List<Product> findAll(@Param("organ") String organ, @Param("method") String method);
+
+	List<Product> findByUser(User user);
 }
