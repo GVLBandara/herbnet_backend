@@ -61,6 +61,7 @@ public class UserProfileServiceImpl implements UserProfileService {
 		current_user.setEmail(userProfileDto.email());
 		updatedUP.setUser(current_user);
 		userProfileRepository.save(updatedUP);
+		userRepository.save(current_user);
 	}
 
 	@Override

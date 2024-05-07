@@ -15,6 +15,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -22,11 +23,18 @@ public class MessageMapperImpl implements MessageMapper {
 	final UserProfileService userProfileService;
 	final UserRepository userRepository;
 	final ProductRepository productRepository;
+
 	@Override
 	public MessageDto toDto(Message message) {
+		Optional<Long> pid = (message.getProduct() != null)?
+				Optional.of(message.getProduct().getProductId())
+				:
+				Optional.empty();
+
 		return new MessageDto(
 				message.getSender().getUserId(),
 				message.getMessageContent(),
+				pid,
 				message.isRead(),
 				message.getTimestamp()
 		);
@@ -49,7 +57,11 @@ public class MessageMapperImpl implements MessageMapper {
 
 	@Override
 	public Message toEntity(NewMessageDto newMessage) {
-		Product product = productRepository.findById(newMessage.productId()).orElse(null);
+		Product product = (newMessage.productId().isPresent())?
+				productRepository.findById(newMessage.productId().get()).orElse(null)
+				:
+				null;
+
 		return new Message(
 				null,
 				null,

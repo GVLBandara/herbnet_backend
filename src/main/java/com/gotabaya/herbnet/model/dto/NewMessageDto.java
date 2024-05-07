@@ -1,8 +1,10 @@
 package com.gotabaya.herbnet.model.dto;
 
+import java.util.Optional;
+
 public record NewMessageDto(
 		Long senderId,
 		Long receiverId,
-		Long productId,
+		Optional<Long> productId,
 		String messageContent
 ) {}

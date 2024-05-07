@@ -1,6 +1,10 @@
 [
-  {"messageId": null, "sender": {"userId": 1}, "receiver": {"userId": 2}, "product": {"productId": 1}, "messageContent": "Hello! I'm interested in your Plant1.", "timestamp": "2023-11-16T15:30:00", "isRead": true},
-  {"messageId": null, "sender": {"userId": 2}, "receiver": {"userId": 1}, "product": {"productId": 2}, "messageContent": "Hi! Sure, what information would you like about Plant2?", "timestamp": "2023-11-16T15:45:00", "isRead": true},
+  {"messageId": null, "sender": {"userId": 1}, "receiver": {"userId": 2}, "product": {"productId": 1}, "messageContent": "1. Hello! I'm interested in your Plant1.", "timestamp": "2023-11-16T15:30:00", "isRead": true},
+  {"messageId": null, "sender": {"userId": 2}, "receiver": {"userId": 1}, "product": {"productId": 2}, "messageContent": "2. Hi! Sure, what information would you like about Plant2?", "timestamp": "2023-11-16T15:45:00", "isRead": true},
+  {"messageId": null, "sender": {"userId": 1}, "receiver": {"userId": 2}, "product": {"productId": 1}, "messageContent": "3. 1->2", "timestamp": "2023-11-16T15:46:00", "isRead": true},
+  {"messageId": null, "sender": {"userId": 2}, "receiver": {"userId": 1}, "product": {"productId": 2}, "messageContent": "4. 2->1", "timestamp": "2023-11-16T15:47:00", "isRead": true},
+  {"messageId": null, "sender": {"userId": 2}, "receiver": {"userId": 1}, "product": {"productId": 1}, "messageContent": "5. 2->1", "timestamp": "2023-11-16T15:48:00", "isRead": true},
+  {"messageId": null, "sender": {"userId": 1}, "receiver": {"userId": 2}, "product": {"productId": 1}, "messageContent": "6. 1->2", "timestamp": "2023-11-16T15:49:00", "isRead": true},
   {"messageId": null, "sender": {"userId": 3}, "receiver": {"userId": 4}, "product": {"productId": 3}, "messageContent": "Hello! Is Plant3 available for trade?", "timestamp": "2023-11-16T16:00:00", "isRead": false},
   {"messageId": null, "sender": {"userId": 4}, "receiver": {"userId": 2}, "product": {"productId": 4}, "messageContent": "Yes, Plant4 is available. What do you have for trade?", "timestamp": "2023-11-16T16:15:00", "isRead": true},
   {"messageId": null, "sender": {"userId": 5}, "receiver": {"userId": 6}, "product": {"productId": 5}, "messageContent": "Hi there! I'm interested in your Plant5.", "timestamp": "2023-11-16T16:30:00", "isRead": false},
@@ -48,6 +52,5 @@
   {"messageId": null, "sender": {"userId": 7}, "receiver": {"userId": 10}, "product": {"productId": 7}, "messageContent": "Final questions about Plant7.", "timestamp": "2023-11-16T15:30:00", "isRead": false},
   {"messageId": null, "sender": {"userId": 8}, "receiver": {"userId": 9}, "product": {"productId": 8}, "messageContent": "Final details about Plant8.", "timestamp": "2023-11-16T15:35:00", "isRead": false},
   {"messageId": null, "sender": {"userId": 9}, "receiver": {"userId": 10}, "product": {"productId": 9}, "messageContent": "Finalizing details about Plant9.", "timestamp": "2023-11-16T15:40:00", "isRead": false},
-  {"messageId": null, "sender": {"userId": 10}, "receiver": {"userId": 9}, "product": {"productId": 10}, "messageContent": "Last answers about Plant10.", "timestamp": "2023-11-16T15:45:00", "isRead": false},
-  {"messageId": null, "sender": {"userId": 2}, "receiver": {"userId": 1}, "product": {"productId": 1}, "messageContent": "messageContent", "timestamp": "2024-01-08T00:25:53", "isRead": true}
+  {"messageId": null, "sender": {"userId": 10}, "receiver": {"userId": 9}, "product": {"productId": 10}, "messageContent": "Last answers about Plant10.", "timestamp": "2023-11-16T15:45:00", "isRead": false}
 ]

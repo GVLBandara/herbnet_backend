@@ -1,5 +1,6 @@
 package com.gotabaya.herbnet.model;
 
+import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -26,6 +27,7 @@ public class Message {
 	@JoinColumn(name = "receiverid", referencedColumnName = "userid")
 	private User receiver;
 
+	@Nullable
 	@ManyToOne
 	@JoinColumn(name = "productid", referencedColumnName = "productid")
 	private Product product;
