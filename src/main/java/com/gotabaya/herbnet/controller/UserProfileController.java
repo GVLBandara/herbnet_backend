@@ -10,6 +10,7 @@ import org.springframework.web.client.HttpServerErrorException;
 import java.security.Principal;
 
 @RequiredArgsConstructor
+@CrossOrigin
 @RestController
 @RequestMapping("/userprofile")
 public class UserProfileController {

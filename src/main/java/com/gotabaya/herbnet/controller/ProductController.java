@@ -26,10 +26,20 @@ public class ProductController {
 
 	@GetMapping("/search")
 	List<ProductDto_short> findAll(
-			@RequestParam(value = "organ", required = false) String organ,
-			@RequestParam(value = "method", required = false) String method
+			@RequestParam(value = "key", required = false, defaultValue ="") String key,
+			@RequestParam(value = "organ", required = false, defaultValue ="") String organ,
+			@RequestParam(value = "method", required = false, defaultValue ="") String method
 	){
-		return productService.list_short(organ, method);
+
+		if(organ.equals("*")) organ = "";
+		if(method.equals("*")) method = "";
+
+		System.out.println(key+" "+organ+" "+method);
+//		return productService.list_short(organ, method);
+		return productService.list_short(organ, method).stream()
+				.filter(
+						p -> p.description().concat(p.plantData()).toLowerCase().contains(key.toLowerCase()))
+				.toList();
 	}
 
 	@GetMapping("/{productId}")

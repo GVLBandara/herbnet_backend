@@ -47,6 +47,7 @@ public class MessageMapperImpl implements MessageMapper {
 		senderProfile = userProfileService.findById(withUserId);
 		String withUserName = senderProfile.firstName() + " " + senderProfile.lastName();
 		return new MessageListPreviewDto(
+				user.getUserId(),
 				withUserId,
 				withUserName,
 				message.getMessageContent(),
