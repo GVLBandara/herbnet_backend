@@ -1,0 +1,56 @@
+version: "3.8"
+
+services:
+  herbnet-db:
+    image: registry.entgra.io/mysql:latest
+    container_name: herbnet-db
+    restart: unless-stopped
+    volumes:
+      - ../db/data:/var/lib/mysql
+    environment:
+      - TZ=Asia/Colombo
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=herbnet_dev
+    networks:
+      - bridge_net
+    healthcheck:
+      test: "/usr/bin/mysql --user=root --password=root --execute \"SELECT 1;\""
+      interval: 10s
+      retries: 10
+      start_period: 30s
+      timeout: 10s
+
+  herbnet-backend:
+    image: herbnet-backend:dev
+    container_name: herbnet-backend
+    restart: unless-stopped
+    depends_on:
+      herbnet-db:
+        condition: service_healthy
+    environment:
+      - TZ=Asia/Colombo
+      - LOGGING_LEVEL_ROOT=INFO
+      - SPRING.DATASOURCE.URL=jdbc:mysql://herbnet-db:3306/herbnet_dev
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+    networks:
+      - bridge_net
+
+  herbnet-ui:
+    image: herbnet-ui:dev
+    container_name: herbnet-ui
+    ports:
+      - "80:80"
+      - "443:443"
+    depends_on:
+      - herbnet-backend
+    networks:
+      - bridge_net
+
+networks:
+  bridge_net:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.30.0.0/24
+          gateway: 172.30.0.1
