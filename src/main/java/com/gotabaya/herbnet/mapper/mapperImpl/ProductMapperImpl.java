@@ -31,7 +31,7 @@ public class ProductMapperImpl implements ProductMapper {
 		return new ProductDto_short(
 				product.getProductId(),
 				product.getSpecies().getEnglishName(),
-				String.join(" ", product.getProcessingMethod(), product.getSpecies().getEnglishName(), product.getPlantOrgan()),
+				String.join(" ", product.getProcessingMethod(), product.getSpecies().getEnglishName(), product.getPlantOrgan(), product.getAdditionalInformation()),
 				product.getDescription(),
 				String.format("%.2f", product.getPrice())
 		);
